@@ -1,6 +1,5 @@
-(ns game-of-life.core)
+(ns game-of-life.core
+  (require [game-of-life.io :as io]))
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+;; (io/read-cells-from "examples/pulsar.txt")
+(io/read-cells-from "examples/lwss.txt")
