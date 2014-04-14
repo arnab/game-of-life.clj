@@ -1,5 +1,5 @@
 (ns game-of-life.io
-  (require [clojure.string :as str :only [split-lines]]))
+  (require [clojure.string :as str :only [join split-lines]]))
 
 (def sym-to-state
   {"X" :alive, "-" :dead})
@@ -27,17 +27,20 @@
 
 (defn- visualize-cells
   [cells]
-  (map #(str % " ")
-       (map cell-to-sym cells)))
+  (map cell-to-sym cells))
 
 (defn visualize
   ([rows-of-cells]
-     (visualize rows-of-cells ""))
-  ([rows-of-cells out]
+     (visualize rows-of-cells []))
+  ([rows-of-cells result]
      (if (empty? rows-of-cells)
-       out
+       result
        (visualize (rest rows-of-cells)
-                  (str out
-                       (reduce str
-                               (visualize-cells (first rows-of-cells)))
-                       "\n")))))
+                  (conj result
+                        (visualize-cells (first rows-of-cells)))))))
+
+(defn display
+  [rows-of-cells]
+  (str/join "\n"
+            (map #(str/join " " %)
+                 (visualize rows-of-cells))))
