@@ -1,11 +1,12 @@
 (ns game-of-life.io
-  (require [clojure.string :as str :only [join split-lines]]))
+  (require [clojure.string :as str :only [join split-lines]]
+           [clojure.set :as set :only [map-invert]]))
 
 (def sym-to-state
   {"X" :alive, "-" :dead})
 
 (def state-to-sym
-  (clojure.set/map-invert sym-to-state))
+  (set/map-invert sym-to-state))
 
 (defn- str-to-cell
   [sym]
