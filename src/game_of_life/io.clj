@@ -33,11 +33,11 @@
 (defn visualize
   ([rows-of-cells]
      (visualize rows-of-cells []))
-  ([rows-of-cells result]
+  ([rows-of-cells acc]
      (if (empty? rows-of-cells)
-       result
+       acc
        (visualize (rest rows-of-cells)
-                  (conj result
+                  (conj acc
                         (visualize-cells (first rows-of-cells)))))))
 
 (defn display
